@@ -6,8 +6,9 @@ except:
     import os
 import time
 def login_with_cookies():
-    with open('cookies.txt', 'r') as f:
-        cookies = eval(f.read())
+    cookies = os.environ['cookies']
+    # with open('cookies.txt', 'r') as f:
+        # cookies = eval(f.read())
 
     for cookie in cookies: # Add the cookies to the current browser session
         driver.add_cookie(cookie)
@@ -30,8 +31,9 @@ def login_with_pass():
     ok_button = driver.find_element("xpath", "//input[@value='OK']")
     ok_button.click()
     cookies = driver.get_cookies()
-    with open('cookies.txt', 'w') as f:
-        f.write(str(cookies))
+    # with open('cookies.txt', 'w') as f:
+    #     f.write(str(cookies))
+    os['environ'] = str(cookies)
 def login():
     goto('mbasic.facebook.com')
     try:
