@@ -25,15 +25,19 @@ def login_with_pass():
     
     password_field = driver.find_element("css selector","input[type='password']")
     password_field.send_keys(os.environ['fb_pass'])
-    # password_field.send_keys(Keys.RETURN)
-    login_button = driver.find_element("xpath", "//input[@value='Log In']")
-    login_button.click()
-    ok_button = driver.find_element("xpath", "//input[@value='OK']")
-    ok_button.click()
+    password_field.send_keys(Keys.RETURN)
+    # login_button = driver.find_element("xpath", "//input[@value='Log In']")
+    # login_button.click()
+    try:
+        time.sleep(5)
+        ok_button = driver.find_element("xpath", "//input[@value='OK']")
+        ok_button.click()
+    except:
+      pass
     cookies = driver.get_cookies()
     # with open('cookies.txt', 'w') as f:
     #     f.write(str(cookies))
-    os['environ'] = str(cookies)
+    os.environ['cookies'] = str(cookies)
 def login():
     goto('mbasic.facebook.com')
     try:

@@ -11,7 +11,7 @@ def getSender():
 
 def getPost():
     try:
-        return str(str(xpath("//meta[@property='og:image:alt']").get_attribute("content"))+"\n\n")
+        return str("\n\n"+str(xpath("//meta[@property='og:image:alt']").get_attribute("content"))+"\n\n")
     except:
         return ''
 

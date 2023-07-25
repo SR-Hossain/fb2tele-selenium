@@ -32,14 +32,10 @@ def get_permalinks():
 
 def load_saved_posts():
     prev_posts = dict() 
-    fl = True
-    while fl:
-        # prev_posts = dict(json.load(open('posts.json')))
-        try:
-            prev_posts = dict(json.load(open('posts.json')))
-            fl = False
-        except: 
-            print('prev post ashe nai dict e')
+    try:
+        prev_posts = dict(json.load(open('posts.json')))
+    except: 
+        print('prev post ashe nai dict e')
     return prev_posts
 
 def save_post(saved_posts):
@@ -58,7 +54,7 @@ def send_new_posts_to_telegram():
             if saved_posts[post['link']]==post['hash']:
                 continue
             post['extra'] += '\n#updated_post'
-        print(post)
+        # print(post)
         tele_bot.sendPost(post)
         saved_posts[post['link']]=post['hash']
     save_post(saved_posts)
