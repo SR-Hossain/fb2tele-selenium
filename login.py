@@ -15,7 +15,7 @@ def login_with_cookies():
 
     # driver.refresh()
     goto('mbasic.facebook.com')
-
+    
     notifications_link = driver.find_element('xpath', "//nav/a[4]")
     
 

@@ -24,4 +24,5 @@ chrome_options.add_experimental_option(
     "prefs", {"profile.default_content_setting_values.notifications": 1}
 )
 driver = webdriver.Chrome(options=chrome_options)
+driver.set_window_size(340, 620)
 # driver = webdriver.Chrome()

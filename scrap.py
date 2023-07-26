@@ -8,9 +8,10 @@ from fetch import fetch
 import tele_bot, json
 
 def get_permalinks():
-    goto('mobile.facebook.com/'+os.environ['group_link'])
+    goto('mbasic.facebook.com/'+os.environ['group_link'])
     sleep(10)
-    link_elements = xpath("//a[abbr]", 'all')
+    # link_elements = xpath("//a[abbr]", 'all')
+    link_elements = driver.find_elements("link text", "Full Story")
     permalinks = []
 
 
