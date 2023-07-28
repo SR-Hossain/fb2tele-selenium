@@ -24,11 +24,12 @@ def getExtras():
     except:
         extra_text = ''
     extra_links = driver.find_elements("xpath", "//div[@id='m_story_permalink_view']/div[1]//a[@href]")
+    extra_link = ''
     for link in extra_links:
         link = link.get_attribute('href')
         if 'php?u=' in link:
             link = unquote(link[link.find('=')+1:])
-            extra_text += '\n<a href="'+link+'">File/Link</a>'
+            extra_link = '\n<a href="'+link+'">File/Link</a>'
         elif link.startswith('https://mbasic.facebook.com/photo.php?'):
             images.append(link)
 
@@ -37,7 +38,7 @@ def getExtras():
         driver.get(image)
         image = xpath("//img[contains(@class, 'img') and starts-with(@src, 'https://scontent')]").get_attribute('src')
         final_images.append(image)
-    return [final_images, extra_text]
+    return [final_images, extra_text+extra_link]
 
 def fetch(permalink):
     post = dict()
