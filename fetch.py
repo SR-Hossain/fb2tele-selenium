@@ -6,6 +6,7 @@ except:
     import os
 # from time import sleep
 from hash_string import hash
+from time import sleep
 
 def getSender():
     return driver.find_element("id", "m_story_permalink_view").find_element("tag name", "strong").get_attribute("innerText")
@@ -36,9 +37,18 @@ def getExtras():
 
     final_images = list()
     for image in images:
-        driver.get(image)
-        image = xpath("//img[contains(@class, 'img') and starts-with(@src, 'https://scontent')]").get_attribute('src')
-        final_images.append(image)
+        driver.get(image.replace('mbasic','web'))
+        # image = xpath("//img[contains(@class, 'img') and starts-with(@src, 'https://scontent')]").get_attribute('src')
+        counter = 10
+        while counter:
+            try:
+                image = xpath("//img[@data-visualcompletion='media-vc-image']")
+                image = image.get_attribute('src')
+                counter = 0
+                final_images.append(image)
+            except:
+                sleep(1)
+                counter -= 1
     return [final_images, extra_text+extra_link]
 
 def fetch(permalink):
