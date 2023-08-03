@@ -9,7 +9,7 @@ import tele_bot, json
 
 def get_permalinks():
     goto('mbasic.facebook.com/'+os.environ['group_link'])
-    sleep(10)
+    sleep(4)
     # link_elements = xpath("//a[abbr]", 'all')
     link_elements = driver.find_elements("link text", "Full Story")
     permalinks = []
@@ -44,21 +44,29 @@ def save_post(saved_posts):
         json.dump(dict(list(saved_posts.items())[-1000:]), ps)
     
     
-def fetched_posts():
-    permalinks = get_permalinks()
-    return list(fetch(link) for link in permalinks)
+# def fetched_posts():
+    
 
 def send_new_posts_to_telegram():
+    # saved_posts = load_saved_posts()
+    # for post in fetched_posts():
+    #     if post['link'] in saved_posts:
+    #         if saved_posts[post['link']]==post['hash']:
+    #             continue
+    #         post['extra'] += '\n#updated_post'
+    #     # print(post)
+    #     tele_bot.sendPost(post)
+    #     saved_posts[post['link']]=post['hash']
+    # save_post(saved_posts)
     saved_posts = load_saved_posts()
-    for post in fetched_posts():
-        if post['link'] in saved_posts:
-            if saved_posts[post['link']]==post['hash']:
-                continue
-            post['extra'] += '\n#updated_post'
-        # print(post)
-        tele_bot.sendPost(post)
-        saved_posts[post['link']]=post['hash']
+    for link in get_permalinks():
+        post = fetch(link, saved_posts)
+        if post != None:
+            tele_bot.sendPost(post)
+            saved_posts[post['link']] = post['hash']
     save_post(saved_posts)
+  
+    # save_post(fetched_posts())
 
 
     

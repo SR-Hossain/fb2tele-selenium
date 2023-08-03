@@ -7,13 +7,14 @@ except:
 # from time import sleep
 from hash_string import hash
 from time import sleep
+import tele_bot
 
 def getSender():
     return driver.find_element("id", "m_story_permalink_view").find_element("tag name", "strong").get_attribute("innerText")
 
 def getPost():
     try:
-        return str("\n\n"+str(xpath("//meta[@property='og:image:alt']").get_attribute("content"))+"\n\n")
+        return str("\n\n"+str(xpath("//meta[@property='og:image:alt']").get_attribute("content")))
     except:
         return ''
 
@@ -51,16 +52,22 @@ def getExtras():
                 counter -= 1
     return [final_images, extra_text+extra_link]
 
-def fetch(permalink):
+def fetch(permalink, saved_posts):
     post = dict()
     goto('mbasic.facebook.com/groups/'+os.environ['group_link']+'/permalink/'+str(permalink))
     post['link'] = permalink
-    post['sender'] = getSender() + ' [Jump To Post ↗]'
     post['text'] = getPost()
+    post['hash'] = str(hash(post['text']))
+    
+    if post['link'] in saved_posts and saved_posts[post['link']]==post['hash']:
+        return None
+    post['sender'] = getSender() + ' [Jump To Post ↗]'
     extra = getExtras()
     post['extra'] = extra[1]
     post['image'] = extra[0]
-    post['hash'] = str(hash(post['text']))
+    if post['link'] in saved_posts:
+        post['extra'] += '\n#updated_post'
+    # tele_bot.sendPost(post)
     return post
     
     
