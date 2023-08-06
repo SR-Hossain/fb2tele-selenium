@@ -12,12 +12,17 @@ chat_id = os.environ['chat_id']
 
 bot = telegram.Bot(token=bot_api)
 
-async def sendMsg(text):
+async def sendMsg(text, extra):
     for i in range(0, len(text), 2000):
         time.sleep(5)
         # txt = urllib.parse.quote(txt)
         try:
             await bot.send_message(chat_id, text[i:i + 2000], parse_mode='html', disable_web_page_preview=True)
+        except Exception as e:
+            print(str(e))
+    if len(extra)>0:
+        try:  
+            await bot.send_message(chat_id, extra, parse_mode='html')
         except Exception as e:
             print(str(e))
 
@@ -38,9 +43,9 @@ async def sendPhoto(imgs, text):
 async def main(post):
     sender = '<a href="https://fb.com/groups/'+os.environ['group_link']+'/permalink/'+post['link']+'">' + post['sender'] + '</a>'
     txt = post['text']
-    txt += post['extra']
+    # txt += post['extra']
     if len(txt)>0:
-        await sendMsg(sender + txt)
+        await sendMsg(sender + txt, post['extra'])
     if len(post['image'])>0:
         await sendPhoto(post['image'], sender)
 
