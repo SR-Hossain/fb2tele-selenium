@@ -32,6 +32,8 @@ def getExtras():
         link = link.get_attribute('href')
         if 'php?u=' in link:
             link = unquote(link[link.find('=')+1:])
+            if 'fbclid' in link:
+                link = link[:link.find('fbclid')-1]
             extra_link = '\n<a href="'+link+'">File/Link</a>'
         elif link.startswith('https://mbasic.facebook.com/photo.php?'):
             images.append(link)
