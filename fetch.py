@@ -60,7 +60,7 @@ def fetch(permalink, saved_posts):
     post['link'] = permalink
     post['text'] = getPost()
     post['hash'] = str(hash(post['text']))
-    
+    # print(post)
     if post['link'] in saved_posts and saved_posts[post['link']]==post['hash']:
         return None
     post['sender'] = getSender() + ' [Jump To Post ↗]'

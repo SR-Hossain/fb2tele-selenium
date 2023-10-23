@@ -6,7 +6,7 @@ except:
     import os
 import time
 def login_with_cookies():
-    cookies = os.environ['cookies']
+    cookies = eval(os.environ['cookies'])
     # with open('cookies.txt', 'r') as f:
         # cookies = eval(f.read())
 
@@ -45,3 +45,32 @@ def login():
     except:
         login_with_pass()
     print('Login Complete!!!')
+    try:
+        print(driver.find_element('tag name', 'body').text)
+        
+        driver.find_element("css selector","input[value='Continue']").click()
+        full_html = driver.page_source
+        print(driver.find_element('tag name', 'body').text)
+        driver.find_element("css selector","input[value='Continue']").click()
+        full_html = driver.page_source
+        print(driver.find_element('tag name', 'body').text)
+        time.sleep(30)
+        driver.find_element("css selector","input[value='Continue']").click()
+        full_html = driver.page_source
+        print(driver.find_element('tag name', 'body').text)
+        
+        # Save the HTML content to a file named 'a.html'.
+        with open('a.html', 'w', encoding='utf-8') as file:
+            file.write(full_html)
+        time.sleep(60)
+        driver.find_element("css selector","input[value='OK']").click()
+        full_html = driver.page_source
+        print(driver.find_element('tag name', 'body').text)
+        
+        # Save the HTML content to a file named 'a.html'.
+        with open('a.html', 'w', encoding='utf-8') as file:
+            file.write(full_html)
+        time.sleep(60)
+        login_with_pass()
+    except:
+        print('emnei hoise')
