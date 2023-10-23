@@ -1,9 +1,10 @@
 from setup_selenium import goto, driver, xpath
 import time 
+time_slept = 0
 
 
 def check_for_sust():
-    time_slept = 0
+    global time_slept
     while True:
         try:
             driver.find_element("partial link text", "SUST CSE").click()
@@ -28,7 +29,10 @@ def click_on_unread():
             time.sleep(1)
 
 
+
 def wait_in_unread_for_new_posts():
+    global time_slept
+    time_slept = 0
     notification()
     click_on_unread()
 
