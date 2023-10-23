@@ -14,7 +14,10 @@ def getSender():
 
 def getPost():
     try:
-        return str("\n\n"+str(xpath("//meta[@property='og:image:alt']").get_attribute("content")))
+        s = xpath("//*[@id='m_story_permalink_view']/div[1]/div/div").get_attribute("innerText").replace('See translation', '')
+        s = s[max(0,s.find('\n\n')):]
+        return str(s)
+
     except:
         return ''
 
@@ -34,7 +37,7 @@ def getExtras():
             link = unquote(link[link.find('=')+1:])
             if 'fbclid' in link:
                 link = link[:link.find('fbclid')-1]
-            extra_link = '\n<a href="'+link+'">File/Link</a>'
+            extra_link = '\n<a href="'+link+'">Click here to open the provided File/Link</a>'
         elif link.startswith('https://mbasic.facebook.com/photo.php?'):
             images.append(link)
 
@@ -71,6 +74,5 @@ def fetch(permalink, saved_posts):
         post['extra'] += '\n#updated_post'
     # tele_bot.sendPost(post)
     return post
-    
-    
-    
+
+
