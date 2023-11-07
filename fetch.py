@@ -7,7 +7,7 @@ except:
 # from time import sleep
 from hash_string import hash
 from time import sleep
-import tele_bot
+#import tele_bot
 
 def getSender():
     return driver.find_element("id", "m_story_permalink_view").find_element("tag name", "strong").get_attribute("innerText")
