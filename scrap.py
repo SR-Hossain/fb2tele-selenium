@@ -5,7 +5,8 @@ except:
     import os
 from time import sleep
 from fetch import fetch
-import tele_bot, json
+import tele_bot
+import json
 
 def get_permalinks():
     goto('mbasic.facebook.com/'+os.environ['group_link'])

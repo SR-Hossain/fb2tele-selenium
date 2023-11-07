@@ -13,7 +13,7 @@ def home():
 def runApp():
   
   # serve(app, host="0.0.0.0", port=8080)
-  app.run(host='0.0.0.0',port=8080)
+  app.run(host='0.0.0.0',port=8070)
 
 def run():
   Thread(target=runApp).start()
