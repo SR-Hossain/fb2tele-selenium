@@ -8,7 +8,8 @@ Step 2: Create account
 Step 3: Import this github project to your repl
 Step 4: Choose main.py as main python file when asked to
 Step 5: Configure secret variables from secrets toolbar
-Step 6: Run
+Step 6: Add 'pkgs.chromedriver' and 'pkgs.chromium' to replit.nix inside deps array/list.
+Step 7: Run
 
 
 If you have issues, we can communicate in <a href="https://github.com/SR-Hossain/FB2Tele/issues">Issues</a> section...

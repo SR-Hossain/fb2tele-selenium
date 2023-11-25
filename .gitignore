@@ -1,0 +1,6 @@
+__pycache__
+venv
+.replit
+posts.json
+pyproject.toml
+replit.nix
