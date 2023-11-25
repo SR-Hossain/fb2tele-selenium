@@ -3,5 +3,6 @@ venv
 .replit
 posts.json
 pyproject.toml
-replit.nix
 .local
+poetry.lock
+.pythonlibs
