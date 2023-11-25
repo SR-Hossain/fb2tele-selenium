@@ -4,3 +4,4 @@ venv
 posts.json
 pyproject.toml
 replit.nix
+.local
