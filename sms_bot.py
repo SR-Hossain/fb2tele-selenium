@@ -8,20 +8,23 @@ except:
 import asyncio
 
 sms_api = os.environ['sms_api_token']
-# single number for now
 receivers = os.environ['receiver_phone_number'].split(',')
 senderid = os.environ['sender_id']
 
 def process_text(text):
     cnt = 0
-    for i in range(len(text)):
+    i = 0
+    text = '\n'.join([x.strip() for x in text.split('\n') if len(x.strip())>0])
+    while i < len(text):
         if text[i].isdigit():
             cnt += 1
         elif text[i].isalpha():
             cnt = 0
         if cnt == 3:
-            text = text[:i] + 'o' + text[i:]
+            text = text[:i] + '|' + text[i:]
+            i += 1
             cnt = 0
+        i += 1
     
     return text
 
