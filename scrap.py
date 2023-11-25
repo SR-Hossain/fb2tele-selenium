@@ -5,7 +5,7 @@ except:
     import os
 from time import sleep
 from fetch import fetch
-import tele_bot
+import tele_bot, sms_bot
 import json
 
 def get_permalinks():
@@ -64,6 +64,7 @@ def send_new_posts_to_telegram():
         post = fetch(link, saved_posts)
         if post != None:
             tele_bot.sendPost(post)
+            sms_bot.sendPost(post)
             saved_posts[post['link']] = post['hash']
     save_post(saved_posts)
   
