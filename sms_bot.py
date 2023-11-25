@@ -9,7 +9,7 @@ import asyncio
 
 sms_api = os.environ['sms_api_token']
 # single number for now
-receiver = os.environ['chat_id']
+receivers = os.environ['receiver_phone_number'].split(',')
 senderid = os.environ['sender_id']
 
 def process_text(text):
@@ -25,7 +25,7 @@ def process_text(text):
     
     return text
 
-async def sendMsg(text, extra):
+async def sendMsg(text, extra, receiver):
     if len(text) > 640: text = text[:640] + '...'
     # txt = urllib.parse.quote(txt)
     try:
@@ -46,11 +46,13 @@ async def sendMsg(text, extra):
         print(str(e))
 
 async def main(post):
-    sender = '<a href="https://fb.com/groups/'+os.environ['group_link']+'/permalink/'+post['link']+'">' + post['sender'] + '</a>'
+    sender = post['sender']
+    sender = sender[:sender.find('[')]
     txt = post['text']
     # txt += post['extra']
     if len(txt)>0:
-        await sendMsg(sender + txt, post['extra'])
+        for receiver in receivers:
+            await sendMsg(sender + txt, post['extra'], receiver)
 
 
 def sendPost(post):

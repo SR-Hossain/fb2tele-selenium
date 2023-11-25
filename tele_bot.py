@@ -38,7 +38,10 @@ async def sendPhoto(imgs, text):
         media_group.append(telegram.InputMediaPhoto(str(imgs[i])))
 
     # Send the media group
-    await bot.send_media_group(chat_id, media_group)
+    try:
+        await bot.send_media_group(chat_id, media_group)
+    except:
+        print('photo didnt go...',imgs[0])
 
 async def main(post):
     sender = '<a href="https://fb.com/groups/'+os.environ['group_link']+'/permalink/'+post['link']+'">' + post['sender'] + '</a>'
