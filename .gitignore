@@ -5,3 +5,4 @@ posts.json
 pyproject.toml
 replit.nix
 .local
+sms_bot_test.py
