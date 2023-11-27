@@ -6,3 +6,6 @@ pyproject.toml
 replit.nix
 .local
 sms_bot_test.py
+.local
+poetry.lock
+.pythonlibs

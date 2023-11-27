@@ -7,3 +7,5 @@ os.environ['chat_id'] = 'telegram channel/group id'
 os.environ['sms_api_token'] = 'sms api token'
 os.environ['receiver_phone_number'] = 'receiver number'
 os.environ['sender_id'] = 'sender number'
+
+remove this line to run in vs code
