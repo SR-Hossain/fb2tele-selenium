@@ -7,6 +7,8 @@ except:
     import os
 import asyncio
 
+from gptit import shorten_text
+
 sms_api = os.environ['sms_api_token']
 receivers = os.environ['receiver_phone_number'].split(',')
 senderid = os.environ['sender_id']
@@ -32,7 +34,7 @@ async def sendMsg(text, extra, receiver):
     if len(text) > 640: text = text[:640] + '...'
     # txt = urllib.parse.quote(txt)
     try:
-        msg = process_text(text)
+        msg = process_text(shorten_text(text))
         url = 'http://api.smsinbd.com/sms-api/sendsms'
         body = {
             'api_token': sms_api,
@@ -65,12 +67,8 @@ def sendPost(post):
 def testMsg():
     loop = asyncio.get_event_loop()
     txt = """
-    25.11.2023 (Saturday)
-
-    AI Quiz
-    Syllabus : Ch 9, 11, 19 @1PM
-    @G1 --- Odd
-    @G2 --- Even
+    যাদের সোসাইটি ফি জমা দেয়া হয়েছে তাদের লিস্ট।আমার কাছে এখনো ১/১ এবং ১/২ এর লিস্টটা আসেনি।তাই ঐটা এখনো আপডেট করিনি।পরিক্ষার আগে সবাই সোসাইটি ফি ৬০০ টাকা করে ৩৪০৫০৫৩৫ এই হিসাব নাম্বারে জমা দিয়ে স্লিপ আমার কাছে জমা দিস।
+society fee - Google Drive
     """
     loop.run_until_complete(sendMsg(txt, ''))
 
