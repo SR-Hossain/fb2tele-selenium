@@ -10,13 +10,12 @@ def has_unicode(text):
     return False
 
 def shorten_text(text):
-    
     if has_unicode(text):
-        prompt = text + "\n\n" + "translate text to english and remove unicode characters"
+        prompt = text + "\n\n" + "translate text to english. output only translated text"
     else:
         if len(text) < 290:
             return text
-        prompt = text + "\n\n" + "shorten text to fit within 290 characters, don't leave out key parts"
+        prompt = text + "\n\n" + "shorten text to fit within 290 characters, don't leave out key parts. output only shortened text"
 
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
@@ -26,6 +25,9 @@ def shorten_text(text):
     )
 
     res = response.choices[0].message.content
+    # remove all unicode characters
+    res = "".join([char for char in res if ord(char) < 128])
+
     return res[:440]
 
 if __name__ == '__main__':
