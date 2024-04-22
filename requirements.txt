@@ -1,5 +1,0 @@
-selenium
-python-telegram-bot
-flask
-waitress
-aiohttp
