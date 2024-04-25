@@ -1,0 +1,9 @@
+My prompt: a html content of a facebook post
+Your response: a json only
+Json format: {
+    "sender_name": "",
+    "post_text": "...",
+    "summary": "...",
+    "media_urls": ["..."],
+}
+N.B: summary should be concise with a maximum of 2-4 sentences separated by newline, each sentence should contain only 2-4 concise words.
